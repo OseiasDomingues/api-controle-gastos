@@ -10,32 +10,38 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Entity
+
+@Table(name = "Categoria")
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @ToString
-@AllArgsConstructor
-@NoArgsConstructor
-public class Conta implements Serializable {
+@Entity
+public class Categoria implements Serializable {
 
     @Serial
-    private static final long serialVersionUID = 6693762186166765711L;
+    private static final long serialVersionUID = 2079414738731575051L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private Double valorInicial;
+    private Double valorFinal;
     @OneToMany
     @JoinTable(joinColumns = @JoinColumn, inverseJoinColumns = @JoinColumn)
     @ToString.Exclude
-    List<Calendario> calendarios = new ArrayList<>();
+    private List<Movimentacao> movimentacao = new ArrayList<>();
+    private Double novaDespesa;
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Conta conta = (Conta) o;
-        return id != null && Objects.equals(id, conta.id);
+        Categoria categoria = (Categoria) o;
+        return id != null && Objects.equals(id, categoria.id);
     }
 
     @Override

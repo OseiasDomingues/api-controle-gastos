@@ -1,12 +1,10 @@
 package com.API.ControleDeGastosMensais.config;
 
-import com.API.ControleDeGastosMensais.models.Calendario;
-import com.API.ControleDeGastosMensais.models.Conta;
-import com.API.ControleDeGastosMensais.models.Despesa;
-import com.API.ControleDeGastosMensais.models.Mes;
+import com.API.ControleDeGastosMensais.models.*;
 import com.API.ControleDeGastosMensais.repositories.CalendarioRepository;
+import com.API.ControleDeGastosMensais.repositories.CategoriaRepository;
 import com.API.ControleDeGastosMensais.repositories.ContaRepository;
-import com.API.ControleDeGastosMensais.repositories.DespesaRepository;
+import com.API.ControleDeGastosMensais.repositories.MovimentacaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,44 +21,52 @@ public class DummyData {
     @Autowired
     ContaRepository contaRepository;
     @Autowired
-    DespesaRepository despesaRepository;
+    MovimentacaoRepository movimentacaoRepository;
+    @Autowired
+    CategoriaRepository categoriaRepository;
 
     @PostConstruct
     public void mock(){
-        Despesa d1 = new Despesa(null, "Haburger", 50.0);
-        Despesa d2 = new Despesa(null, "Haburger", 50.0);
-        Despesa d3 = new Despesa(null, "Haburger", 50.0);
-        Despesa d4 = new Despesa(null, "Haburger", 50.0);
-        Despesa d5 = new Despesa(null, "Haburger", 50.0);
-        Despesa d6 = new Despesa(null, "Haburger", 50.0);
+        Movimentacao d1 = new Despesa(null, "Haburger", 50.0);
+        Movimentacao d2 = new Despesa(null, "Haburger", 50.0);
+        Movimentacao d3 = new Despesa(null, "Haburger", 50.0);
+        Movimentacao d4 = new Despesa(null, "Haburger", 50.0);
+        Movimentacao d5 = new Despesa(null, "Haburger", 50.0);
+        Movimentacao d6 = new Despesa(null, "Haburger", 50.0);
 
-        List<Despesa> despesas1 = new ArrayList<>();
-        List<Despesa> despesas2 = new ArrayList<>();
-        List<Despesa> despesas3 = new ArrayList<>();
+        List<Movimentacao> m1 = new ArrayList<>();
+        List<Movimentacao> m2 = new ArrayList<>();
+        List<Movimentacao> m3 = new ArrayList<>();
 
 
-        despesas1.addAll(Arrays.asList(d1,d2));
-        despesas2.addAll(Arrays.asList(d3,d4));
-        despesas3.addAll(Arrays.asList(d5,d6));
+        m1.addAll(Arrays.asList(d1,d2));
+        m2.addAll(Arrays.asList(d3,d4));
+        m3.addAll(Arrays.asList(d5,d6));
 
-        despesaRepository.saveAll(Arrays.asList(d1,d2,d3,d4,d5,d6));
+        movimentacaoRepository.saveAll(Arrays.asList(d1,d2,d3,d4,d5,d6));
 
-        Conta acc1 = new Conta(null,"Conta Lazer", 100.00,100.00,despesas1,null);
-        Conta acc2 = new Conta(null,"Conta Ajusda", 100.00,100.00,despesas2,null);
-        Conta acc3 = new Conta(null,"Conta Parcela", 100.00,100.00,despesas3,null);
+        Categoria cat1 = new Categoria(null,"Conta Lazer", 100.00,100.00,m1,null);
+        Categoria cat2 = new Categoria(null,"Conta Ajusda", 100.00,100.00,m2,null);
+        Categoria cat3 = new Categoria(null,"Conta Parcela", 100.00,100.00,m3,null);
 
-        List<Conta> contas = new ArrayList<>();
+        List<Categoria> categorias = new ArrayList<>();
 
-        contas.add(acc1);
-        contas.add(acc2);
-        contas.add(acc3);
+        categorias.add(cat1);
+        categorias.add(cat2);
+        categorias.add(cat3);
 
-        contaRepository.saveAll(Arrays.asList(acc1,acc2,acc3));
+        categoriaRepository.saveAll(Arrays.asList(cat1,cat2,cat3));
 
-        Calendario c1 = new Calendario(null, "2020",Mes.JANEIRO ,2000.10,contas);
+        Calendario c1 = new Calendario(null, "2020",Mes.JANEIRO ,2000.10, categorias);
+
+        List<Calendario> calendarioList = new ArrayList<>();
+
+        calendarioList.add(c1);
 
         calendarioRepository.save(c1);
 
+        Conta caju = new Conta(null, "Caju",calendarioList);
 
+        contaRepository.save(caju);
     }
 }

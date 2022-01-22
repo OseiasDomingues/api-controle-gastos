@@ -40,7 +40,7 @@ public class Calendario implements Serializable {
     @OneToMany
     @JoinTable(joinColumns = @JoinColumn, inverseJoinColumns = @JoinColumn)
     @ToString.Exclude
-    private List<Conta> contas = new ArrayList<>();
+    private List<Categoria> categorias = new ArrayList<>();
 
     @Override
     public boolean equals(Object o) {
