@@ -3,8 +3,6 @@ package com.API.ControleDeGastosMensais.models.requests;
 import lombok.Data;
 
 @Data
-public class CategoriaRequests {
-
+public class ContaMovimentRequests {
     private Long id;
-
 }

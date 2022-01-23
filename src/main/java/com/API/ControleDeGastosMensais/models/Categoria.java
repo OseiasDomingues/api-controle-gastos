@@ -35,17 +35,18 @@ public class Categoria implements Serializable {
     @JoinTable(joinColumns = @JoinColumn, inverseJoinColumns = @JoinColumn)
     @ToString.Exclude
     private List<Movimentacao> movimentacao = new ArrayList<>();
-    private BigDecimal novaDespesa;
+    @ManyToOne
+    private Conta conta;
 
-    public Categoria(Long id, String name, String valorInicial, String valorFinal, List<Movimentacao> movimentacao, String novaDespesa) {
+
+    public Categoria(Long id, String name, String valorInicial, String valorFinal, List<Movimentacao> movimentacao,Conta conta ) {
         this.id = id;
         this.name = name;
         this.valorInicial = new BigDecimal(valorInicial);
         this.valorFinal = new BigDecimal(valorFinal);
         this.movimentacao = movimentacao;
-        if(novaDespesa != null){
-            this.novaDespesa = new BigDecimal(novaDespesa);
-        }
+        this.conta = conta;
+
     }
 
     /*VALOR INICIAL*/
@@ -90,26 +91,6 @@ public class Categoria implements Serializable {
         return valorFinal;
     }
 
-    /*NOVA DESPESA*/
-
-    //Valor com cifrão
-    public String getNovaDespesa() {
-        return MoneyUtils.formatMoney(novaDespesa);
-    }
-
-    public void setNovaDespesa(String valorInicial) {
-        this.novaDespesa = MoneyUtils.setMoney(valorInicial);
-    }
-    //Valor string para Set com Get
-    @JsonIgnore
-    public String getNovaDespesaForSet() {
-        return novaDespesa.toString();
-    }
-    //Valor para calculos
-    @JsonIgnore
-    public BigDecimal getNovaDespesaForCalc() {
-        return novaDespesa;
-    }
 
     @Override
     public boolean equals(Object o) {

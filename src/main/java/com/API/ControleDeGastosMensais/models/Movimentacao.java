@@ -24,13 +24,15 @@ public abstract class Movimentacao {
     private String dataMoviment;
     @OneToOne
     private Categoria categoria;
+    private String tipo;
 
-    public Movimentacao(Long id, String descricao, String valor, String dataMoviment, Categoria categoria) {
+    public Movimentacao(Long id, String descricao, String valor, String dataMoviment, Categoria categoria, String tipo) {
         this.id = id;
         this.descricao = descricao;
         this.valor = new BigDecimal(valor);
         this.dataMoviment = DateUtils.formatDate(dataMoviment);
         this.categoria = categoria;
+        this.tipo = tipo;
     }
 
     public String getValor() {

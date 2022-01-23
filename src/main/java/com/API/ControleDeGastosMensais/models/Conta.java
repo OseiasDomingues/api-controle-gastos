@@ -6,6 +6,7 @@ import org.hibernate.Hibernate;
 import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -25,6 +26,11 @@ public class Conta implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private BigDecimal total;
+    @OneToMany
+    @JoinTable(joinColumns = @JoinColumn, inverseJoinColumns = @JoinColumn)
+    @ToString.Exclude
+    List<Movimentacao> movimentacao = new ArrayList<>();
     @OneToMany
     @JoinTable(joinColumns = @JoinColumn, inverseJoinColumns = @JoinColumn)
     @ToString.Exclude
