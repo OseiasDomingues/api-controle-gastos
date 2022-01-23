@@ -32,9 +32,11 @@ dependencies {
 	implementation 'org.xerial:sqlite-jdbc:3.36.0.3'
 	implementation 'com.github.gwenn:sqlite-dialect:0.1.2'
 	implementation 'io.springfox:springfox-boot-starter:3.0.0'
-	implementation 'joda-time:joda-time:2.10.13'
 	implementation 'org.joda:joda-convert:2.2.2'
 	implementation 'org.joda:joda-money:1.0.1'
+
+	implementation 'org.mapstruct:mapstruct:1.4.2.Final'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
 
 }
 

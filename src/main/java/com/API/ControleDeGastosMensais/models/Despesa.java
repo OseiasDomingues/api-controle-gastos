@@ -5,6 +5,10 @@ import org.hibernate.Hibernate;
 
 import javax.persistence.Entity;
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -21,8 +25,8 @@ public class Despesa extends Movimentacao implements Serializable {
         return getId() != null && Objects.equals(getId(), despesa.getId());
     }
 
-    public Despesa(Long id, String name, Double valor) {
-        super(id, name, valor);
+    public Despesa(Long id, String name, String valor, String data,Categoria categoria) {
+        super(id, name, valor, data, categoria);
     }
 
 
